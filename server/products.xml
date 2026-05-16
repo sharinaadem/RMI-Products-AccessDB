@@ -1,0 +1,30 @@
+
+
+<products>
+<product id="1">
+<name>Laptop</name>
+<description>Lenovo ThinkPad X1 Carbon - 14" Intel Core i7</description>
+<price>800000.0</price>
+</product>
+<product id="2">
+<name>Mobile</name>
+<description>Xiaomi Mi 9 - 6.39" AMOLED Snapdragon 955</description>
+<price>11000.0</price>
+</product>
+<product id="3">
+<name>Bag</name>
+<description>Samsonite Premium Laptop Bag - Water Resistant</description>
+<price>800.0</price>
+</product>
+<product id="4">
+<name>Charger</name>
+<description>Xiaomi 65W Fast Charger - USB-C GaN Technology</description>
+<price>230.0</price>
+</product>
+
+<product id="5">
+<name>Earphones</name>
+<description>xiaomi</description>
+<price>22.0</price>
+</product>
+</products> 
