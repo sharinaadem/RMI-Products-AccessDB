@@ -1,6 +1,7 @@
 
 package server;
 
+import common.ProductRecord;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.List;
@@ -35,7 +36,7 @@ public class Server {
 
             // ── Step 2: Load product data from MS Access ──────────────
             System.out.println("\n[Server] Reading data from MS Access: " + DB_FILE);
-            List<AccessDBLoader.ProductData> productDataList = AccessDBLoader.load(DB_FILE);
+            List<ProductRecord> productDataList = AccessDBLoader.load(DB_FILE);
 
             // ── Step 3: Get (or create) the RMI Registry ─────────────
             // Use createRegistry() to start one, or getRegistry() if already running.
@@ -51,13 +52,13 @@ public class Server {
             // ── Step 4: Create ProductImpl objects from DB data and bind them ──
             System.out.println("\n[Server] Registering products in RMI Registry...");
 
-            for (AccessDBLoader.ProductData data : productDataList) {
+            for (ProductRecord data : productDataList) {
 
                 // Create the remote object
-                ProductImpl productImpl = new ProductImpl(data.name, data.description, data.price);
+                ProductImpl productImpl = new ProductImpl(data.getName(), data.getDescription(), data.getPrice());
 
                 // Use the product name (lowercase) as the registry key
-                String bindKey = data.name.toLowerCase();
+                String bindKey = data.getName().toLowerCase();
 
                 // Bind the remote object into the registry
                 registry.rebind(bindKey, productImpl);

@@ -1,5 +1,7 @@
 package client;
 
+import common.AbstractProductRecord;
+import common.ProductRecord;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +14,7 @@ import java.util.List;
  */
 public class AccessDBSaver {
 
-    public static void saveProducts(String dbPath, List<ProductSnapshot> products, boolean clearFirst) throws Exception {
+    public static void saveProducts(String dbPath, List<? extends ProductRecord> products, boolean clearFirst) throws Exception {
         String url = "jdbc:ucanaccess://" + dbPath + ";memory=false";
 
         // Allow UCanAccess to register its CLASSPATH functions in HSQLDB.
@@ -30,10 +32,10 @@ public class AccessDBSaver {
             try (PreparedStatement insertStmt = conn.prepareStatement(
                     "INSERT INTO Products (Name, Description, Price) VALUES (?, ?, ?)")) {
 
-                for (ProductSnapshot product : products) {
-                    insertStmt.setString(1, product.name);
-                    insertStmt.setString(2, product.description);
-                    insertStmt.setDouble(3, product.price);
+                for (ProductRecord product : products) {
+                    insertStmt.setString(1, product.getName());
+                    insertStmt.setString(2, product.getDescription());
+                    insertStmt.setDouble(3, product.getPrice());
                     insertStmt.executeUpdate();
                 }
             }
@@ -42,15 +44,9 @@ public class AccessDBSaver {
         System.out.println("[AccessDBSaver] Saved " + products.size() + " product(s) to database.");
     }
 
-    public static class ProductSnapshot {
-        public final String name;
-        public final String description;
-        public final double price;
-
+    public static class ProductSnapshot extends AbstractProductRecord {
         public ProductSnapshot(String name, String description, double price) {
-            this.name = name;
-            this.description = description;
-            this.price = price;
+            super(name, description, price);
         }
     }
 }

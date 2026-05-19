@@ -1,6 +1,7 @@
 package client;
 
 import common.Product;
+import common.ProductRecord;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class Client {
 			Registry registry = LocateRegistry.getRegistry(HOST, PORT);
 
 			String[] names = registry.list();
-			List<AccessDBSaver.ProductSnapshot> products = new ArrayList<>();
+			List<ProductRecord> products = new ArrayList<>();
 
 			for (String name : names) {
 				Product product = (Product) registry.lookup(name);
