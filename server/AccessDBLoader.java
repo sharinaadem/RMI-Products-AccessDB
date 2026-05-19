@@ -1,5 +1,7 @@
 package server;
 
+import common.AbstractProductRecord;
+import common.ProductRecord;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,8 +16,8 @@ import java.util.List;
  */
 public class AccessDBLoader {
 
-    public static List<ProductData> load(String dbPath) throws Exception {
-        List<ProductData> products = new ArrayList<>();
+    public static List<ProductRecord> load(String dbPath) throws Exception {
+        List<ProductRecord> products = new ArrayList<>();
 
         String url = "jdbc:ucanaccess://" + dbPath + ";memory=false";
 
@@ -48,15 +50,9 @@ public class AccessDBLoader {
         return products;
     }
 
-    public static class ProductData {
-        public final String name;
-        public final String description;
-        public final double price;
-
+    public static class ProductData extends AbstractProductRecord {
         public ProductData(String name, String description, double price) {
-            this.name = name;
-            this.description = description;
-            this.price = price;
+            super(name, description, price);
         }
     }
 }
