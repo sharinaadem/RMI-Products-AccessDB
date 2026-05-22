@@ -25,8 +25,8 @@ public class AccessDBLoader {
         System.out.println("[AccessDBLoader] Connecting to MS Access DB: " + dbPath);
 
         try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement stmt = conn.prepareStatement(
-                     "SELECT Name, Description, Price FROM Products");
+                     PreparedStatement stmt = conn.prepareStatement(
+                         "SELECT Name, Description, Price FROM Products");
              ResultSet rs = stmt.executeQuery()) {
 
             int row = 0;
@@ -39,7 +39,7 @@ public class AccessDBLoader {
                 products.add(new ProductData(name, description, price));
 
                 System.out.println("[AccessDBLoader] Row " + row + " -> "
-                        + name + " | " + description + " | PHP " + price);
+                    + name + " | " + description + " | PHP " + price);
             }
 
             System.out.println("[AccessDBLoader] Total records loaded: " + products.size());

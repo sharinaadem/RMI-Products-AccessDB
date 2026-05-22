@@ -27,4 +27,12 @@
 <description>xiaomi</description>
 <price>22.0</price>
 </product>
+
+<product id="6">
+<name>aquaflask</name>
+<description>tumbler</description>
+<price>179.0</price>
+</product>
+
+
 </products> 
